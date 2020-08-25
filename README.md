@@ -5,7 +5,7 @@ I found a dataset on Kaggle containing pictures of different hands in each of th
 
 .<br />
 +-- data <br />
-|   +-- train<br />
+|&nbsp;+-- train<br />
 |   |   +-- paper<br />
 |   |   +-- rock<br />
 |   |   +-- scissors<br />
