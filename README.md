@@ -1,5 +1,15 @@
 # Rock_Paper_Scissors
 
+## Data
+I found a dataset on Kaggle containing pictures of different hands in each of the three configurations: rock, paper, and scissors. The directory tree is as follows 
+
+.
++-- data
+|   +-- train
+|   |   +-- paper
+|   |   +-- rock
+|   |   +-- scissors
+
 Image Classification with Rock Paper Scissors image dataset. Build/Use a CNN to be able to classify whether an image is of a hand in the Rock, Paper, or Scissors configuration. 
 
 Dataset is here: https://www.kaggle.com/sanikamal/rock-paper-scissors-dataset?
