@@ -4,7 +4,7 @@
 I found a dataset on Kaggle containing pictures of different hands in each of the three configurations: rock, paper, and scissors. The directory tree is as follows 
 
 .
-+-- data
++-- data <br />
 |   +-- train
 |   |   +-- paper
 |   |   +-- rock
