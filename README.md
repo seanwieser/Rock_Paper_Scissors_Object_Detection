@@ -5,18 +5,18 @@ I found a dataset on Kaggle containing pictures of different hands in each of th
 
 .<br />
 +-- data <br />
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+-- train<br />
-|   |   +-- paper<br />
-|   |   +-- rock<br />
-|   |   +-- scissors<br />
-|   +-- test<br />
-|   |   +-- paper<br />
-|   |   +-- rock<br />
-|   |   +-- scissors<br />
-|   +-- validation<br />
-|   |   +-- paper<br />
-|   |   +-- rock<br />
-|   |   +-- scissors<br />
+|&nbsp;&nbsp;&nbsp;&nbsp+-- train<br />
+|&nbsp;&nbsp;&nbsp;&nbsp|&nbsp;&nbsp;&nbsp;&nbsp+-- paper<br />
+|&nbsp;&nbsp;&nbsp;&nbsp|&nbsp;&nbsp;&nbsp;&nbsp+-- rock<br />
+|&nbsp;&nbsp;&nbsp;&nbsp|&nbsp;&nbsp;&nbsp;&nbsp+-- scissors<br />
+|&nbsp;&nbsp;&nbsp;&nbsp+-- test<br />
+|&nbsp;&nbsp;&nbsp;&nbsp|&nbsp;&nbsp;&nbsp;&nbsp+-- paper<br />
+|&nbsp;&nbsp;&nbsp;&nbsp|&nbsp;&nbsp;&nbsp;&nbsp+-- rock<br />
+|&nbsp;&nbsp;&nbsp;&nbsp|&nbsp;&nbsp;&nbsp;&nbsp+-- scissors<br />
+|&nbsp;&nbsp;&nbsp;&nbsp+-- validation<br />
+|&nbsp;&nbsp;&nbsp;&nbsp|&nbsp;&nbsp;&nbsp;&nbsp+-- paper<br />
+|&nbsp;&nbsp;&nbsp;&nbsp|&nbsp;&nbsp;&nbsp;&nbsp+-- rock<br />
+|&nbsp;&nbsp;&nbsp;&nbsp|&nbsp;&nbsp;&nbsp;&nbsp+-- scissors<br />
 
 Image Classification with Rock Paper Scissors image dataset. Build/Use a CNN to be able to classify whether an image is of a hand in the Rock, Paper, or Scissors configuration. 
 
