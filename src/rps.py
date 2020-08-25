@@ -56,10 +56,19 @@ def load_and_featurize_data():
 
     y_train = np.array([3*i//X_train.shape[0] for i in range(X_train.shape[0])])
     y_test = np.array([3*i//X_test.shape[0] for i in range(X_test.shape[0])])
-    # # convert class vectors to binary class matrices (don't change)
+
+    # convert class vectors to binary class matrices
     Y_train = to_categorical(y_train, nb_classes)  # cool
     Y_test = to_categorical(y_test, nb_classes)
-    # # in Ipython you should compare Y_test to y_test
+    
+    # Shuffle all data
+    splits = [X_train, X_test, y_train, y_test]
+    rng_state = np.random.get_state()
+    for split in splits:
+        np.random.shuffle(split)
+        np.random.set_state(rng_state)
+
+
     return X_train, X_test, Y_train, Y_test
 
 
@@ -109,7 +118,7 @@ def define_model(nb_filters, kernel_size, input_shape, pool_size):
 
 if __name__ == '__main__':
     # important inputs to the model: don't changes the ones marked KEEP
-    batch_size = 10 # number of training samples used at a time to update the weights
+    batch_size = 20 # number of training samples used at a time to update the weights
     nb_classes = 3    # number of output possibilities: [0 - 2] KEEP
     nb_epoch = 1       # number of passes through the entire train dataset before weights "final"
     img_rows, img_cols, channels = 300, 300, 4   # the size of the MNIST images KEEP
