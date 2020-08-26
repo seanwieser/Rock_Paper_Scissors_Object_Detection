@@ -73,8 +73,8 @@ def train_top_model():
     # model.add(Dropout(0.5))
     model.add(Dense(3, activation='softmax'))
 
-    model.compile(optimizer='rmsprop',
-                  loss='binary_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer='adam',
+                  loss='categorical_crossentropy', metrics=['accuracy'])
 
     model.fit(train_data, train_labels,
               epochs=epochs,
@@ -97,6 +97,10 @@ if __name__ == '__main__':
     batch_size = 16
     save_bottlebeck_features()
     train_top_model()
+    os.remove(top_model_weights_path)
+    os.remove('bottleneck_features_validation.npy')
+    os.remove('bottleneck_features_train.npy')
+
 
 
 
