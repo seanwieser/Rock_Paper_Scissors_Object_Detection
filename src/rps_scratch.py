@@ -78,7 +78,7 @@ model.add(Dropout(0.5))
 model.add(Dense(3))
 model.add(Activation('softmax'))
 
-model.compile(loss='sparse_catergorical_crossentropy',
+model.compile(loss='sparse_categorical_crossentropy',
               optimizer='rmsprop',
               metrics=['accuracy'])
 
