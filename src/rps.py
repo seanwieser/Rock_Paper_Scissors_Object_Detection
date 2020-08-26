@@ -72,11 +72,9 @@ def train_top_model():
     model.add(Dense(256, activation='relu'))
     # model.add(Dropout(0.5))
     model.add(Dense(3, activation='softmax'))
-    model.add(Dense(1, activation='sigmoid'))
 
-
-    model.compile(optimizer='adam',
-                  loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer='rmsprop',
+                  loss='binary_crossentropy', metrics=['accuracy'])
 
     model.fit(train_data, train_labels,
               epochs=epochs,
