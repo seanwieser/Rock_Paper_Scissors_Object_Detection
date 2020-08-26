@@ -44,12 +44,12 @@ from tensorflow.keras import backend as K
 
 
 # dimensions of our images.
-img_width, img_height = 300, 300
+img_width, img_height = 200, 300
 
 train_data_dir = '../data/train'
 validation_data_dir = '../data/test'
-nb_train_samples = 2520
-nb_validation_samples = 372
+nb_train_samples = 1836
+nb_validation_samples = 300
 epochs = 50
 batch_size = 16
 
