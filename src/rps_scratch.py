@@ -75,10 +75,10 @@ model.add(Flatten())
 model.add(Dense(64))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
-model.add(Dense(1))
-model.add(Activation('sigmoid'))
+model.add(Dense(3))
+model.add(Activation('softmax'))
 
-model.compile(loss='binary_crossentropy',
+model.compile(loss='sparse_catergorical_crossentropy',
               optimizer='rmsprop',
               metrics=['accuracy'])
 
