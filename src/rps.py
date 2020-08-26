@@ -86,13 +86,13 @@ def train_top_model():
 
 if __name__ == '__main__':
     # dimensions of our images.
-    img_width, img_height = 300, 300
+    img_width, img_height = 200, 300
 
     top_model_weights_path = '../data/bottleneck_fc_model.h5'
     train_data_dir = '../data/train'
     validation_data_dir = '../data/test'
-    nb_train_samples = 840
-    nb_validation_samples = 124
+    nb_train_samples = 612
+    nb_validation_samples = 100
     epochs = 50
     batch_size = 16
     save_bottlebeck_features()
