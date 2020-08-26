@@ -78,10 +78,11 @@ model.add(Dropout(0.5))
 model.add(Dense(3))
 model.add(Activation('softmax'))
 
-model.compile(loss='sparse_categorical_crossentropy',
-              optimizer='rmsprop',
+model.compile(loss='categorical_crossentropy',
+              optimizer='adam',
               metrics=['accuracy'])
 
+model.
 # this is the augmentation configuration we will use for training
 train_datagen = ImageDataGenerator(
     rescale=1. / 255,
