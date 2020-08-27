@@ -136,16 +136,15 @@ if __name__ == "__main__":
         batch_size=batch_size,
         class_mode='categorical')
 
-    history = History()
     if path.exists('../data/model_data/rps_weights_scratch.h5'):
         model.load_weights('../data/model_data/rps_weights_scratch.h5')
     else:
-        model.fit(
+        history = model.fit(
             train_generator,
             steps_per_epoch=nb_train_samples // batch_size,
             epochs=epochs,
             validation_data=validation_generator,
-            validation_steps=nb_validation_samples // batch_size)
+            validation_steps=nb_validation_samples // batch_size, callbacks=[history])
         plot_acc_epoch(history)
         model.save_weights('../data/model_data/rps_weights_scratch.h5')
 
