@@ -60,7 +60,7 @@ def save_bottlebeck_features():
 
 def train_top_model():
     train_data = np.load(open('bottleneck_features_train.npy', 'rb'))
-    train_num, val_num = 840, 124
+    train_num, val_num = nb_train_samples, nb_validation_samples
     train_labels = np.array([0]*train_num + [1]*train_num + [2]*train_num)
 
     validation_data = np.load(open('bottleneck_features_validation.npy', 'rb'))
@@ -71,10 +71,10 @@ def train_top_model():
     model.add(Flatten(input_shape=train_data.shape[1:]))
     model.add(Dense(256, activation='relu'))
     # model.add(Dropout(0.5))
-    model.add(Dense(1, activation='sigmoid'))
+    model.add(Dense(3, activation='softmax'))
 
-    model.compile(optimizer='rmsprop',
-                  loss='binary_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer='adam',
+                  loss='categorical_crossentropy', metrics=['accuracy'])
 
     model.fit(train_data, train_labels,
               epochs=epochs,
@@ -86,17 +86,21 @@ def train_top_model():
 
 if __name__ == '__main__':
     # dimensions of our images.
-    img_width, img_height = 300, 300
+    img_width, img_height = 200, 300
 
     top_model_weights_path = '../data/bottleneck_fc_model.h5'
     train_data_dir = '../data/train'
     validation_data_dir = '../data/test'
-    nb_train_samples = 840
-    nb_validation_samples = 124
+    nb_train_samples = 612
+    nb_validation_samples = 100
     epochs = 50
     batch_size = 16
     save_bottlebeck_features()
     train_top_model()
+    os.remove(top_model_weights_path)
+    os.remove('bottleneck_features_validation.npy')
+    os.remove('bottleneck_features_train.npy')
+
 
 
 

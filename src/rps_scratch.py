@@ -44,12 +44,12 @@ from tensorflow.keras import backend as K
 
 
 # dimensions of our images.
-img_width, img_height = 300, 300
+img_width, img_height = 200, 300
 
 train_data_dir = '../data/train'
 validation_data_dir = '../data/test'
-nb_train_samples = 2520
-nb_validation_samples = 372
+nb_train_samples = 1836
+nb_validation_samples = 300
 epochs = 50
 batch_size = 16
 
@@ -75,13 +75,14 @@ model.add(Flatten())
 model.add(Dense(64))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
-model.add(Dense(1))
-model.add(Activation('sigmoid'))
+model.add(Dense(3))
+model.add(Activation('softmax'))
 
-model.compile(loss='binary_crossentropy',
-              optimizer='rmsprop',
+model.compile(loss='categorical_crossentropy',
+              optimizer='adam',
               metrics=['accuracy'])
 
+model.summary()
 # this is the augmentation configuration we will use for training
 train_datagen = ImageDataGenerator(
     rescale=1. / 255,
@@ -105,6 +106,12 @@ validation_generator = test_datagen.flow_from_directory(
     batch_size=batch_size,
     class_mode='categorical')
 
+sean_generator = test_datagen.flow_from_directory(
+    validation_data_dir,
+    target_size=(img_width, img_height),
+    batch_size=batch_size,
+    class_mode='categorical')
+
 model.fit(
     train_generator,
     steps_per_epoch=nb_train_samples // batch_size,
@@ -113,3 +120,11 @@ model.fit(
     validation_steps=nb_validation_samples // batch_size)
 
 model.save_weights('rps_weights_scratch.h5')
+
+grade = model.evaluate(
+    x=sean_generator, batch_size=batch_size, verbose=1, sample_weight=None, steps=None,
+    callbacks=None, max_queue_size=10, workers=1, use_multiprocessing=False,
+    return_dict=False
+)
+
+print(grade)
