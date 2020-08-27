@@ -44,9 +44,23 @@ from tensorflow.keras import backend as K
 import matplotlib.pyplot as plt
 
 def plot_acc_epoch(history):
-    accs = history.history
+    # summarize history for accuracy
     fig, ax = plt.subplots()
-    ax.plot(accs)
+    ax.plot(history.history['accuracy'])
+    ax.plot(history.history['val_accuracy'])
+    ax.title('model accuracy')
+    ax.ylabel('accuracy')
+    ax.xlabel('epoch')
+    ax.legend(['train', 'test'], loc='upper left')
+
+    # summarize history for loss
+    fig2, ax2 = plt.subplots()
+    ax.plot(history.history['loss'])
+    ax.plot(history.history['val_loss'])
+    ax.title('model loss')
+    ax.ylabel('loss')
+    ax.xlabel('epoch')
+    ax.legend(['train', 'test'], loc='upper left')
     fig.show()
 
 
@@ -119,13 +133,14 @@ sean_generator = test_datagen.flow_from_directory(
     batch_size=batch_size,
     class_mode='categorical')
 
+history = History()
 model.fit(
     train_generator,
     steps_per_epoch=nb_train_samples // batch_size,
     epochs=epochs,
     validation_data=validation_generator,
     validation_steps=nb_validation_samples // batch_size)
-
+plot_acc_epoch(history)
 model.save_weights('rps_weights_scratch.h5')
 
 grade = model.evaluate(
