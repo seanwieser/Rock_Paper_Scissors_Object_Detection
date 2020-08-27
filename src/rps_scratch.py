@@ -41,6 +41,13 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras.layers import Activation, Dropout, Flatten, Dense
 from tensorflow.keras import backend as K
+import matplotlib.pyplot as plt
+
+def plot_acc_epoch(history):
+    accs = history.history
+    fig, ax = plt.subplots()
+    ax.plot(accs)
+    fig.show()
 
 
 # dimensions of our images.
