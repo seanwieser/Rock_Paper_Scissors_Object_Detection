@@ -47,22 +47,22 @@ from os import path
 def plot_acc_epoch(history):
     # summarize history for accuracy
     fig, ax = plt.subplots()
-    ax.plot(history.history['accuracy'])
-    ax.plot(history.history['val_accuracy'])
-    ax.title('model accuracy')
+    ax.plot(history.history['accuracy'], label='train')
+    ax.plot(history.history['val_accuracy'], label='test')
+    ax.set_title('model accuracy')
     ax.ylabel('accuracy')
     ax.xlabel('epoch')
-    ax.legend(['train', 'test'], loc='upper left')
+    ax.legend(loc='upper left')
     plt.savefig('accuracy.png')
 
     # summarize history for loss
     fig2, ax2 = plt.subplots()
-    ax.plot(history.history['loss'])
-    ax.plot(history.history['val_loss'])
-    ax.title('model loss')
+    ax.plot(history.history['loss'], label='train')
+    ax.plot(history.history['val_loss', label='test'])
+    ax.set_title('model loss')
     ax.ylabel('loss')
     ax.xlabel('epoch')
-    ax.legend(['train', 'test'], loc='upper left')
+    ax.legend(loc='upper left')
     plt.savefig('loss.png')    
 
 if __name__ == "__main__":
