@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
     train_data_dir = '../data/train'
     validation_data_dir = '../data/test'
-    sean_data_dir = '../data/sean'
+    sean_data_dir = '../data/sean_test'
     nb_train_samples = 2684
     nb_validation_samples = 390
     epochs = 50
