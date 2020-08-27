@@ -106,6 +106,12 @@ validation_generator = test_datagen.flow_from_directory(
     batch_size=batch_size,
     class_mode='categorical')
 
+sean_generator = test_datagen.flow_from_directory(
+    validation_data_dir,
+    target_size=(img_width, img_height),
+    batch_size=batch_size,
+    class_mode='categorical')
+
 model.fit(
     train_generator,
     steps_per_epoch=nb_train_samples // batch_size,
@@ -114,3 +120,11 @@ model.fit(
     validation_steps=nb_validation_samples // batch_size)
 
 model.save_weights('rps_weights_scratch.h5')
+
+grade = model.evaluate(
+    x=sean_generator, batch_size=batch_size, verbose=1, sample_weight=None, steps=None,
+    callbacks=None, max_queue_size=10, workers=1, use_multiprocessing=False,
+    return_dict=False
+)
+
+print(grade)
