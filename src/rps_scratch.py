@@ -42,6 +42,7 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras.layers import Activation, Dropout, Flatten, Dense
 from tensorflow.keras import backend as K
 import matplotlib.pyplot as plt
+from os import path
 
 def plot_acc_epoch(history):
     # summarize history for accuracy
@@ -52,6 +53,7 @@ def plot_acc_epoch(history):
     ax.ylabel('accuracy')
     ax.xlabel('epoch')
     ax.legend(['train', 'test'], loc='upper left')
+    fig.savefig('accuracy.png')
 
     # summarize history for loss
     fig2, ax2 = plt.subplots()
@@ -61,92 +63,95 @@ def plot_acc_epoch(history):
     ax.ylabel('loss')
     ax.xlabel('epoch')
     ax.legend(['train', 'test'], loc='upper left')
-    fig.show()
+    fig2.savefig('loss.png')    
 
+if __name__ == "__main__":
+        # dimensions of our images.
+    img_width, img_height = 200, 300
 
-# dimensions of our images.
-img_width, img_height = 200, 300
+    train_data_dir = '../data/train'
+    validation_data_dir = '../data/test'
+    nb_train_samples = 1836
+    nb_validation_samples = 300
+    epochs = 50
+    batch_size = 16
 
-train_data_dir = '../data/train'
-validation_data_dir = '../data/test'
-nb_train_samples = 1836
-nb_validation_samples = 300
-epochs = 50
-batch_size = 16
+    if K.image_data_format() == 'channels_first':
+        input_shape = (3, img_width, img_height)
+    else:
+        input_shape = (img_width, img_height, 3)
 
-if K.image_data_format() == 'channels_first':
-    input_shape = (3, img_width, img_height)
-else:
-    input_shape = (img_width, img_height, 3)
+    model = Sequential()
+    model.add(Conv2D(32, (3, 3), input_shape=input_shape))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model = Sequential()
-model.add(Conv2D(32, (3, 3), input_shape=input_shape))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Conv2D(32, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Conv2D(32, (3, 3)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Conv2D(64, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Conv2D(64, (3, 3)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Flatten())
+    model.add(Dense(64))
+    model.add(Activation('relu'))
+    model.add(Dropout(0.5))
+    model.add(Dense(3))
+    model.add(Activation('softmax'))
 
-model.add(Flatten())
-model.add(Dense(64))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
-model.add(Dense(3))
-model.add(Activation('softmax'))
+    model.compile(loss='categorical_crossentropy',
+                optimizer='adam',
+                metrics=['accuracy'])
 
-model.compile(loss='categorical_crossentropy',
-              optimizer='adam',
-              metrics=['accuracy'])
+    model.summary()
+    # this is the augmentation configuration we will use for training
+    train_datagen = ImageDataGenerator(
+        rescale=1. / 255,
+        shear_range=0.2,
+        zoom_range=0.2,
+        horizontal_flip=True)
 
-model.summary()
-# this is the augmentation configuration we will use for training
-train_datagen = ImageDataGenerator(
-    rescale=1. / 255,
-    shear_range=0.2,
-    zoom_range=0.2,
-    horizontal_flip=True)
+    # this is the augmentation configuration we will use for testing:
+    # only rescaling
+    test_datagen = ImageDataGenerator(rescale=1. / 255)
 
-# this is the augmentation configuration we will use for testing:
-# only rescaling
-test_datagen = ImageDataGenerator(rescale=1. / 255)
+    train_generator = train_datagen.flow_from_directory(
+        train_data_dir,
+        target_size=(img_width, img_height),
+        batch_size=batch_size,
+        class_mode='categorical')
 
-train_generator = train_datagen.flow_from_directory(
-    train_data_dir,
-    target_size=(img_width, img_height),
-    batch_size=batch_size,
-    class_mode='categorical')
+    validation_generator = test_datagen.flow_from_directory(
+        validation_data_dir,
+        target_size=(img_width, img_height),
+        batch_size=batch_size,
+        class_mode='categorical')
 
-validation_generator = test_datagen.flow_from_directory(
-    validation_data_dir,
-    target_size=(img_width, img_height),
-    batch_size=batch_size,
-    class_mode='categorical')
+    sean_generator = test_datagen.flow_from_directory(
+        validation_data_dir,
+        target_size=(img_width, img_height),
+        batch_size=batch_size,
+        class_mode='categorical')
 
-sean_generator = test_datagen.flow_from_directory(
-    validation_data_dir,
-    target_size=(img_width, img_height),
-    batch_size=batch_size,
-    class_mode='categorical')
+    history = History()
+    if path.exists('../data/model_data/rps_weights_scratch.h5'):
+        model.load_weights('../data/model_data/rps_weights_scratch.h5')
+    else:
+        model.fit(
+            train_generator,
+            steps_per_epoch=nb_train_samples // batch_size,
+            epochs=epochs,
+            validation_data=validation_generator,
+            validation_steps=nb_validation_samples // batch_size)
+        plot_acc_epoch(history)
+        model.save_weights('../data/model_data/rps_weights_scratch.h5')
 
-history = History()
-model.fit(
-    train_generator,
-    steps_per_epoch=nb_train_samples // batch_size,
-    epochs=epochs,
-    validation_data=validation_generator,
-    validation_steps=nb_validation_samples // batch_size)
-plot_acc_epoch(history)
-model.save_weights('rps_weights_scratch.h5')
+    grade = model.evaluate(
+        x=sean_generator, batch_size=batch_size, verbose=1, sample_weight=None, steps=None,
+        callbacks=None, max_queue_size=10, workers=1, use_multiprocessing=False,
+        return_dict=False
+    )
 
-grade = model.evaluate(
-    x=sean_generator, batch_size=batch_size, verbose=1, sample_weight=None, steps=None,
-    callbacks=None, max_queue_size=10, workers=1, use_multiprocessing=False,
-    return_dict=False
-)
-
-print(grade)
+    print(grade)
