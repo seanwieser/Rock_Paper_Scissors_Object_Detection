@@ -144,7 +144,7 @@ if __name__ == "__main__":
             steps_per_epoch=nb_train_samples // batch_size,
             epochs=epochs,
             validation_data=validation_generator,
-            validation_steps=nb_validation_samples // batch_size, callbacks=[history])
+            validation_steps=nb_validation_samples // batch_size)
         plot_acc_epoch(history)
         model.save_weights('../data/model_data/rps_weights_scratch.h5')
 
