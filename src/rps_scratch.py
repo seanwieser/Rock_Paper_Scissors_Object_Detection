@@ -58,7 +58,7 @@ def plot_acc_epoch(history):
     # summarize history for loss
     fig2, ax2 = plt.subplots()
     ax.plot(history.history['loss'], label='train')
-    ax.plot(history.history['val_loss', label='test'])
+    ax.plot(history.history['val_loss'], label='test')
     ax.set_title('model loss')
     ax.ylabel('loss')
     ax.xlabel('epoch')
