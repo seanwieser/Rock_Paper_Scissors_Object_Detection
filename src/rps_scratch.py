@@ -127,7 +127,7 @@ if __name__ == "__main__":
         class_mode='categorical')
 
     validation_generator = datagen.flow_from_directory(
-        validation_data_dir,
+        train_data_dir
         target_size=(img_width, img_height),
         batch_size=batch_size,
         subset='validation',
