@@ -72,9 +72,9 @@ if __name__ == "__main__":
     train_data_dir = '../data/train'
     validation_data_dir = '../data/test'
     sean_data_dir = '../data/sean'
-    nb_train_samples = 1836
-    nb_validation_samples = 300
-    epochs = 15
+    nb_train_samples = 2684
+    nb_validation_samples = 390
+    epochs = 50
     batch_size = 16
 
     if K.image_data_format() == 'channels_first':
@@ -98,7 +98,7 @@ if __name__ == "__main__":
     model.add(Flatten())
     model.add(Dense(64))
     model.add(Activation('relu'))
-    model.add(Dropout(0.5))
+    model.add(Dropout(0.75))
     model.add(Dense(3))
     model.add(Activation('softmax'))
 
@@ -108,34 +108,34 @@ if __name__ == "__main__":
 
     model.summary()
     # this is the augmentation configuration we will use for training
-    train_datagen = ImageDataGenerator(
+    datagen = ImageDataGenerator(
         rescale=1. / 255,
         shear_range=0.2,
         zoom_range=0.2,
+        validation_split=0.2,
         horizontal_flip=True)
 
     # this is the augmentation configuration we will use for testing:
     # only rescaling
-    test_datagen = ImageDataGenerator(rescale=1. / 255)
+    sean_test_datagen = ImageDataGenerator(rescale=1. / 255)
 
-    train_generator = train_datagen.flow_from_directory(
+    train_generator = datagen.flow_from_directory(
         train_data_dir,
         target_size=(img_width, img_height),
-        color_mode="grayscale",
         batch_size=batch_size,
+        subset='training',
         class_mode='categorical')
 
-    validation_generator = test_datagen.flow_from_directory(
+    validation_generator = datagen.flow_from_directory(
         validation_data_dir,
         target_size=(img_width, img_height),
-         color_mode="grayscale",
         batch_size=batch_size,
+        subset='validation',
         class_mode='categorical')
 
-    sean_generator = test_datagen.flow_from_directory(
+    sean_generator = sean_test_datagen.flow_from_directory(
         sean_data_dir,
         target_size=(img_width, img_height),
-        color_mode='grayscale',
         batch_size=batch_size,
         class_mode='categorical')
 
@@ -147,8 +147,7 @@ if __name__ == "__main__":
             steps_per_epoch=nb_train_samples // batch_size,
             epochs=epochs,
             validation_data=validation_generator,
-            validation_steps=nb_validation_samples // batch_size)
-        model.save_weights('../data/model_data/rps_weights_scratch.h5')
+            model.save_weights('../data/model_data/rps_weights_scratch.h5')
         plot_acc_epoch(history)
 
 
