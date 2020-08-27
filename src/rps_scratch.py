@@ -53,7 +53,7 @@ def plot_acc_epoch(history):
     ax.ylabel('accuracy')
     ax.xlabel('epoch')
     ax.legend(['train', 'test'], loc='upper left')
-    fig.savefig('accuracy.png')
+    plt.savefig('accuracy.png')
 
     # summarize history for loss
     fig2, ax2 = plt.subplots()
@@ -63,7 +63,7 @@ def plot_acc_epoch(history):
     ax.ylabel('loss')
     ax.xlabel('epoch')
     ax.legend(['train', 'test'], loc='upper left')
-    fig2.savefig('loss.png')    
+    plt.savefig('loss.png')    
 
 if __name__ == "__main__":
         # dimensions of our images.
@@ -71,6 +71,7 @@ if __name__ == "__main__":
 
     train_data_dir = '../data/train'
     validation_data_dir = '../data/test'
+    sean_data_dir = '../data/sean'
     nb_train_samples = 1836
     nb_validation_samples = 300
     epochs = 50
@@ -130,7 +131,7 @@ if __name__ == "__main__":
         class_mode='categorical')
 
     sean_generator = test_datagen.flow_from_directory(
-        validation_data_dir,
+        sean_data_dir,
         target_size=(img_width, img_height),
         batch_size=batch_size,
         class_mode='categorical')
