@@ -116,7 +116,7 @@ if __name__ == "__main__":
 
     # this is the augmentation configuration we will use for testing:
     # only rescaling
-    test_datagen = ImageDataGenerator(rescale=1. / 255, color_mode='grayscale')
+    test_datagen = ImageDataGenerator(rescale=1. / 255)
 
     train_generator = train_datagen.flow_from_directory(
         train_data_dir,
@@ -135,6 +135,7 @@ if __name__ == "__main__":
     sean_generator = test_datagen.flow_from_directory(
         sean_data_dir,
         target_size=(img_width, img_height),
+        color_mode='grayscale',
         batch_size=batch_size,
         class_mode='categorical')
 
