@@ -74,7 +74,7 @@ if __name__ == "__main__":
     sean_data_dir = '../data/sean'
     nb_train_samples = 1836
     nb_validation_samples = 300
-    epochs = 50
+    epochs = 15
     batch_size = 16
 
     if K.image_data_format() == 'channels_first':
