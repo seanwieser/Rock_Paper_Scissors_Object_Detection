@@ -50,8 +50,8 @@ def plot_acc_epoch(history):
     ax.plot(history.history['accuracy'], label='train')
     ax.plot(history.history['val_accuracy'], label='test')
     ax.set_title('model accuracy')
-    ax.ylabel('accuracy')
-    ax.xlabel('epoch')
+    ax.set_ylabel('accuracy')
+    ax.set_xlabel('epoch')
     ax.legend(loc='upper left')
     plt.savefig('accuracy.png')
 
@@ -60,8 +60,8 @@ def plot_acc_epoch(history):
     ax.plot(history.history['loss'], label='train')
     ax.plot(history.history['val_loss'], label='test')
     ax.set_title('model loss')
-    ax.ylabel('loss')
-    ax.xlabel('epoch')
+    ax.set_ylabel('loss')
+    ax.set_xlabel('epoch')
     ax.legend(loc='upper left')
     plt.savefig('loss.png')    
 
@@ -145,8 +145,9 @@ if __name__ == "__main__":
             epochs=epochs,
             validation_data=validation_generator,
             validation_steps=nb_validation_samples // batch_size)
-        plot_acc_epoch(history)
         model.save_weights('../data/model_data/rps_weights_scratch.h5')
+        plot_acc_epoch(history)
+
 
     grade = model.evaluate(
         x=sean_generator, batch_size=batch_size, verbose=1, sample_weight=None, steps=None,
