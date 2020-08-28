@@ -67,7 +67,7 @@ def plot_confusion_matrix(cm, classes, title='Confusion matrix', cmap=plt.cm.Blu
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
     plt.tight_layout()
-    plt.savefig(filename)
+    plt.savefig(fname)
 
 def make_cm(gen, filename):
     # compute predictions
