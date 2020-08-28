@@ -53,7 +53,7 @@ if __name__ == "__main__":
     sean_data_dir = '../data/sean_test'
     nb_train_samples = 2684
     nb_validation_samples = 390
-    epochs = 50
+    epochs = 10
     batch_size = 16
 
     if K.image_data_format() == 'channels_first':
@@ -124,12 +124,13 @@ if __name__ == "__main__":
         model.save_weights('../data/model_data/rps_weights_scratch.h5')
 
 
-    # sean_generator = sean_test_datagen.flow_from_directory(
-    #     sean_data_dir,
-    #     target_size=(img_width, img_height),
-    #     batch_size=batch_size,
-    #     class_mode='categorical')
+    sean_generator = sean_test_datagen.flow_from_directory(
+        sean_data_dir,
+        target_size=(img_width, img_height),
+        batch_size=batch_size,
+        color_mode='grayscale',
+        class_mode='categorical')
 
-    # grade = model.evaluate(x=sean_generator)
+    grade = model.evaluate(x=sean_generator)
 
     print(grade)
