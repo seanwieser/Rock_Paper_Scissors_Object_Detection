@@ -126,10 +126,9 @@ if __name__ == "__main__":
     img_width, img_height = 200, 300
     train_data_dir = '../data/train'
     validation_data_dir = '../data/test'
-    sean_data_dir = '../data/sean_test'
     nb_train_samples = 2684
     nb_validation_samples = 390
-    epochs = 3
+    epochs = 50
     batch_size = 16
     # this is the augmentation configuration we will use for training
     datagen = ImageDataGenerator(
