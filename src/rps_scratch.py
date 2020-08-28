@@ -123,6 +123,7 @@ def build_model():
 
 
 if __name__ == "__main__":
+    img_width, img_height = 200, 300
     train_data_dir = '../data/train'
     validation_data_dir = '../data/test'
     sean_data_dir = '../data/sean_test'
