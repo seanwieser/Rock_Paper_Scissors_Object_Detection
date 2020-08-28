@@ -138,8 +138,17 @@ Test Confusion Matrix
 ![cm](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/test_cm.png "Test Confusion Matrix")
 
 
-## Using CNN in Realtime
+## Using CNN in Real Time
 
-## Conclusion
+Rock Paper Scissors is an interactive game that takes place in real time. Loading in images from a directory to predict on is cool but it doesn't help me play the game against the computer in a natural way. In order to solve this problem, I need to pipe video frames into my model for a real time prediction, which is done in run_cam.py
+
+(Add video link to example of real time prediction)
 
 ## Next Steps
+1. Code a Rock Paper Scissors game 
+&nbsp;&nbsp;&nbsp;&nbsp;- counts down and reads your input
+&nbsp;&nbsp;&nbsp;&nbsp;- outputs its own decision based on some algorithm (which could incorporate opponent's recent moves)
+&nbsp;&nbsp;&nbsp;&nbsp;- keeps score over multiple rounds and display nice scoreboard
+&nbsp;&nbsp;&nbsp;&nbsp;- make a web app that anyone can use to play against my AI
+2.Upgrade image classifier to object detector and train model on yahtzee roll image dataset to play yahtzee against my computer
+
