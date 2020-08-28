@@ -90,8 +90,7 @@ It is important to think about the images that are being used. First, the hand i
 ## CNN Architecture
 The architecture for my CNN is very simple.
 
-`
-
+```
 model = Sequential()
     model.add(Conv2D(32, (3, 3), input_shape=input_shape))
     model.add(Activation('relu'))
@@ -115,8 +114,7 @@ model = Sequential()
     model.compile(loss='categorical_crossentropy',
                 optimizer='adam',
                 metrics=['accuracy'])
-    
-`
+```
 
 ## Using AWS Instance
 Maybe not quickly enough, it became apparent to me that my laptop is not capable of running tensorflow in any productive way. In order to overcome this obstacle, I decided to spin up an Amazon Web Services instance. The instance types can be found here: https://aws.amazon.com/ec2/instance-types/
