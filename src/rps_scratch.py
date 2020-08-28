@@ -57,9 +57,9 @@ if __name__ == "__main__":
     batch_size = 16
 
     if K.image_data_format() == 'channels_first':
-        input_shape = (3, img_width, img_height)
+        input_shape = (1, img_width, img_height)
     else:
-        input_shape = (img_width, img_height, 3)
+        input_shape = (img_width, img_height, 1)
 
     model = Sequential()
     model.add(Conv2D(32, (3, 3), input_shape=input_shape))
