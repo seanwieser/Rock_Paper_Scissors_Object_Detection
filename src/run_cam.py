@@ -26,7 +26,7 @@ if __name__ == "__main__":
         target_size=(200, 300),
         batch_size=16,
         class_mode='categorical')
-    predict_image = np.reshape(io.imread('../data/sean_test/paper/sean006.png').astype('float') / 255, (200, 300, 1))
+    predict_image = np.reshape(io.imread('../data/sean_test/paper/sean006.png').astype('float') / 255, (1, 200, 300))
     predict_image = np.expand_dims(predict_image, axis=0)
     model = load_model('../data/model_data/rps_model.h5')
     print('Predicting', predict_image.shape)
