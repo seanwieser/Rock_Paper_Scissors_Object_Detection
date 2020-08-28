@@ -1,17 +1,19 @@
 # Rock_Paper_Scissors
 
-title image!
+![alt text](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/title.jpg "")
 
 ## Introduction
 
-Rock Paper Scissors is a game played by two people where each player simulataneously configures their hand into the shape of a rock, paper, or scissors. Depending on what each player chose to do, a winner is determined by the following: rock beats scissors, scissors beats paper, and paper beats rock. As lonely as it sounds, I love the idea of creating a way to play the game in a natural way against an unnatural opponent, my computer! The only thing stopping us from doing this already is that the computer can't 'see' what you chose to play on a given round. In order to solve this problem, I decided to build an image classifier by training a convolutional neural network on images of hands.
+Rock Paper Scissors is a game played by two people where each player simulataneously configures their hand into the shape of a rock, paper, or scissors. Depending on what each player chose to do, a winner is determined by the following: rock beats scissors, scissors beats paper, and paper beats rock.
+
+As lonely as it sounds, I love the idea of creating a way to play the game in a natural way against an unnatural opponent, my computer! The only thing stopping us from doing this already is that the computer can't 'see' what you chose to play on a given round. In order to solve this problem, I decided to build an image classifier by training a convolutional neural network on images of hands.
 
 ## Dataset Journey
 ### Inital Training Set
 
 I found the dataset on Kaggle (https://www.kaggle.com/drgfreeman/rockpaperscissors/version/2?) containing pictures of different hands in each of the three configurations: rock, paper, and scissors. Each one of these configurations (or classes) had a little over 700 images each, which seemed to be enough for simple image classification. An example of images from this set are shown below:
 
-green unrotated dataset!
+| ![rock](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/kaggle_rock.png)  | ![paper](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/kaggle_paper.png) | ![scissors](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/kaggle_scissors.png)
 
 Each image is 300x200 pixels. The images as a whole have consistent background and lighting but have many styles of hands and different ways they make up each of the three configurations. I was happy to see there was consistency in all the parts of the image that I wasn't predicting on.
 
@@ -21,16 +23,18 @@ I trained an initial model that performed well with validation data that came fr
 
 - lap_cam.py - Captures and saves images using my laptop camera. Captures are made everytime the user clicks 'Enter'
 
-- bulk_crop.py - Crops and resaves all images in a directory to 200x300 pixels in the top right of source image
+- bulk_crop.py - Crops and resaves all images in a directory to 200x300 pixels in the top left of source image
 
-- process_images.py - rotate: Rotates and resaves all images in directory 90 degrees clockwise. Used for Kaggle images.
+- process_images.py - rotate_images: Rotates and resaves all images in directory 90 degrees clockwise. Used for Kaggle images.<br />
                       save_sobels: Saves sobel filtered images of all images in a directory. Used on all images.
 
-my images!
+| ![rock](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/sean_rock.png)  | ![paper](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/sean_paper.png) | ![scissors](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/sean_scissors.png)
 
 ### Final Dataset
 
-final images!
+| ![rock](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/kaggle_rock_sobel.png)  | ![paper](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/kaggle_paper_sobel.png) | ![scissors](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/kaggle_scissors_sobel.png)
+
+| ![rock](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/sean_rock_sobel.png)  | ![paper](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/sean_paper_sobel.png) | ![scissors](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/sean_scissors_sobel.png)
 
 In order to use the incredible functionality of the ImageDataGenerator class (described below), the final structure of the directory tree is as follows:
 
@@ -121,12 +125,31 @@ I decided on the 'p2.xlarge' instance type under the Accelerated Computing secti
 I communicated to the AWS instance through SSH and GitHub. Image data and model data were transferred through SSH while code changes were transferred through GitHub. Because of the CLI aspect of SSH and my fear of code becoming out of sync, I always made changes to the code on my local computer then went through a push/pull cycle.
 
 ## Model Performance
+Training over 100 Epochs
+![training](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/accuracy_100_epochs.png "Training over 100 Epochs")
 
-model training!
-confusion matrix!
+Training over 30 Epochs
+![training](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/accuracy.png "Training over 30 epochs")
 
-## Using CNN in Realtime
+Validation Confusion Matrix
+![cm](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/val_cm.png "Validation Confusion Matrix")
 
-## Conclusion
+Test Confusion Matrix
+![cm](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/test_cm.png "Test Confusion Matrix")
+
+
+## Using CNN in Real Time
+
+Rock Paper Scissors is an interactive game that takes place in real time. Loading in images from a directory to predict on is cool but it doesn't help me play the game against the computer in a natural way. In order to solve this problem, I need to pipe video frames into my model for a real time prediction, which is done in run_cam.py
+
+(Add video link to example of real time prediction)
 
 ## Next Steps
+1. Code a Rock Paper Scissors game <br />
+&nbsp;&nbsp;&nbsp;&nbsp;- counts down and reads your input<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- outputs its own decision based on some algorithm (which could incorporate opponent's recent moves)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- keeps score over multiple rounds and display nice scoreboard <br />
+&nbsp;&nbsp;&nbsp;&nbsp;- make a web app that anyone can use to play against my AI
+
+2. Upgrade image classifier to object detector and train model on yahtzee roll image dataset to play yahtzee against my computer
+
