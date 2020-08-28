@@ -164,6 +164,7 @@ if __name__ == "__main__":
     if path.exists(model_path):
         model = load_model(model_path)
     else:
+        model = build_model()
         history = model.fit(train_generator, steps_per_epoch=nb_train_samples // batch_size, epochs=epochs, validation_data=validation_generator)
         model.save(model_path)
         plot_history(history)
