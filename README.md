@@ -1,6 +1,6 @@
 # Rock_Paper_Scissors
 
-![alt text](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/title.png "")
+![alt text](https://github.com/seanwieser/Rock_Paper_Scissors/images/title.png "")
 
 ## Introduction
 
