@@ -47,7 +47,7 @@ from sklearn.metrics import confusion_matrix
 import itertools
 import numpy as np
 
-def plot_confusion_matrix(cm, classes, title='Confusion matrix', cmap=plt.cm.Blues):
+def plot_confusion_matrix(cm, classes, title='Confusion matrix', cmap=plt.cm.Blues, filename):
     cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
     plt.figure(figsize=(10,10))
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
@@ -67,7 +67,20 @@ def plot_confusion_matrix(cm, classes, title='Confusion matrix', cmap=plt.cm.Blu
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
     plt.tight_layout()
-    plt.savefig('cm.png')
+    plt.savefig(filename)
+
+def make_cm(gen, filename):
+    # compute predictions
+    predictions = model.predict(gen)
+    y_pred = [np.argmax(probas) for probas in predictions]
+    y_test = gen.classes
+    class_names = gen.class_indices.keys()
+    # compute confusion matrix
+    cnf_matrix = confusion_matrix(y_test, y_pred)
+    np.set_printoptions(precision=2)
+
+    # plot normalized confusion matrix
+    plot_confusion_matrix(cnf_matrix, classes=class_names, title='Normalized confusion matrix', filename)
 
 
 def plot_history(history):
@@ -126,9 +139,10 @@ if __name__ == "__main__":
     img_width, img_height = 200, 300
     train_data_dir = '../data/train_split/train'
     validation_data_dir = '../data/train_split/val'
+    test_data_dir = '../data/train_split/test'
     nb_train_samples = 2684
     nb_validation_samples = 390
-    epochs = 5
+    epochs = 2
     batch_size = 16
     # this is the augmentation configuration we will use for training
     datagen = ImageDataGenerator(
@@ -156,6 +170,15 @@ if __name__ == "__main__":
         color_mode='grayscale',
         class_mode='categorical',
         shuffle=False)
+
+    test_generator = sean_test_datagen.flow_from_directory(
+        test_data_dir,
+        target_size=(img_width, img_height),
+        batch_size=batch_size,
+        color_mode='grayscale',
+        class_mode='categorical',
+        shuffle=False)
+
     model_path = '../data/model_data/rps_model.h5'
     if path.exists(model_path):
         model = load_model(model_path)
@@ -165,14 +188,6 @@ if __name__ == "__main__":
         model.save(model_path)
         plot_history(history)
 
-    # compute predictions
-    predictions = model.predict(validation_generator)
-    y_pred = [np.argmax(probas) for probas in predictions]
-    y_test = validation_generator.classes
-    class_names = validation_generator.class_indices.keys()
-    # compute confusion matrix
-    cnf_matrix = confusion_matrix(y_test, y_pred)
-    np.set_printoptions(precision=2)
-
-    # plot normalized confusion matrix
-    plot_confusion_matrix(cnf_matrix, classes=class_names, title='Normalized confusion matrix')
+    make_cm(validation_generator, 'val_cm.png')
+    make_cm(test_generator, 'test_cm.png')
+    
