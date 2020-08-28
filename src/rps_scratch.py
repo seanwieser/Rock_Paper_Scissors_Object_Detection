@@ -37,7 +37,7 @@ data/
 '''
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras.layers import Activation, Dropout, Flatten, Dense
 from tensorflow.keras import backend as K
@@ -88,8 +88,8 @@ def plot_history(history):
     plt.legend(loc='lower right')
     plt.savefig('accuracy.png')
 
-if __name__ == "__main__":
-        # dimensions of our images.
+def build_model():
+    # dimensions of our images.
     img_width, img_height = 200, 300
 
     train_data_dir = '../data/train'
@@ -128,8 +128,11 @@ if __name__ == "__main__":
     model.compile(loss='categorical_crossentropy',
                 optimizer='adam',
                 metrics=['accuracy'])
+    return model
 
-    model.summary()
+
+if __name__ == "__main__":
+
     # this is the augmentation configuration we will use for training
     datagen = ImageDataGenerator(
         rescale=1. / 255,
@@ -159,27 +162,13 @@ if __name__ == "__main__":
         color_mode='grayscale',
         class_mode='categorical',
         shuffle=False)
-    if path.exists('../data/model_data/rps_weights_scratch.h5'):
-        model.load_weights('../data/model_data/rps_weights_scratch.h5')
-        model.save(('../data/model_data/rps_model.h5'))
+    model_path = '../data/model_data/rps_model.h5'
+    if path.exists(model_path):
+        model = load_model(model_path)
     else:
         history = model.fit(train_generator, steps_per_epoch=nb_train_samples // batch_size, epochs=epochs, validation_data=validation_generator)
-        model.save_weights('../data/model_data/rps_weights_scratch.h5')
+        model.save(model_path)
         plot_history(history)
-
-
-
-    # sean_generator = sean_test_datagen.flow_from_directory(
-    #     sean_data_dir,
-    #     target_size=(img_width, img_height),
-    #     batch_size=batch_size,
-    #     color_mode='grayscale',
-    #     class_mode='categorical')
-
-    # grade = model.evaluate(x=sean_generator)
-
-    # print(grade)
-
 
     # compute predictions
     predictions = model.predict(validation_generator)
