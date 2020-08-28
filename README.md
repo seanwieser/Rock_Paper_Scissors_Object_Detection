@@ -124,8 +124,14 @@ I communicated to the AWS instance through SSH and GitHub. Image data and model 
 
 ## Model Performance
 
-model training!
-confusion matrix!
+![training](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/accuracy_100_epochs.png)
+
+![training](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/accuracy_30_epochs.png)
+
+![cm](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/val_cm.png)
+
+![cm](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/test_cm.png)
+
 
 ## Using CNN in Realtime
 
