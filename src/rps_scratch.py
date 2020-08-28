@@ -159,13 +159,14 @@ if __name__ == "__main__":
         color_mode='grayscale',
         class_mode='categorical',
         shuffle=False)
-    history = 0
     if path.exists('../data/model_data/rps_weights_scratch.h5'):
         model.load_weights('../data/model_data/rps_weights_scratch.h5')
         model.save(('../data/model_data/rps_model.h5'))
     else:
         history = model.fit(train_generator, steps_per_epoch=nb_train_samples // batch_size, epochs=epochs, validation_data=validation_generator)
         model.save_weights('../data/model_data/rps_weights_scratch.h5')
+        plot_history(history)
+
 
 
     # sean_generator = sean_test_datagen.flow_from_directory(
@@ -179,7 +180,6 @@ if __name__ == "__main__":
 
     # print(grade)
 
-    plot_history(history)
 
     # compute predictions
     predictions = model.predict(validation_generator)
