@@ -9,13 +9,6 @@ def rotate_images(images, kind):
     for idx, image in enumerate(images):
         io.imsave(f'../rps-cv-images/{kind}_processed/{kind}{str(idx)}.png', rotate(image, -90, resize=True))
 
-def is_white(rgb):
-    return (rgb[0]>100 and rgb[1]>100 and rgb[2]>100)
-    
-def print_image_arrays(images):
-    for image in images:
-        print(image[150][100])
-
 def save_sobels(images, kind):
     print(f'Tranforming: {kind}')
     for idx, image in enumerate(images):
@@ -41,4 +34,3 @@ if __name__ == "__main__":
     # save_sobels(rock_images, 'rock')
     # save_sobels(paper_images, 'paper')
     # save_sobels(scissor_images, 'scissors')
-    print_image_arrays(paper_sobels)
