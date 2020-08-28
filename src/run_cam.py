@@ -34,7 +34,7 @@ if __name__ == "__main__":
     print('Predicting')
     # print(model.summary())
     for image in predict_images:
-        print(model.predict(predict_image, verbose=1))
+        print(model.predict(image))
     
     
     
