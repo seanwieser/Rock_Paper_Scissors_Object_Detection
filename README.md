@@ -54,6 +54,7 @@ In order to use the incredible functionality of the ImageDataGenerator class (de
 ### Preprocessing
 
 Even though I have my image dataset polished off, I don't want to directly feed them into a model to train. In order to get more variety of images to train on, I decided to use the ImageDataGenerator class in keras. This produces many augmentations of all the images for the model to train on. Hopefully this will help the model be more robust in terms of inputs it can predict well on.
+
 It might help to look at a snippet of code to see how I implemented this class:
 
 
@@ -87,7 +88,35 @@ It might help to look at a snippet of code to see how I implemented this class:
 It is important to think about the images that are being used. First, the hand in each image is oriented and sized in a fairly consistent way. This means that I don't need to augment the images in any extreme way to be able to predict on inputs that are similar to the images that the model is training on. If I expected to have inputs that are varying to a higher degree, I might have been more aggressive with the data augmentation and preproccessing.   
 
 ## CNN Architecture
-The architecture for my CNN was inspired by the blog post https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
+The architecture for my CNN is very simple.
+
+`
+
+model = Sequential()
+    model.add(Conv2D(32, (3, 3), input_shape=input_shape))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+
+    model.add(Conv2D(32, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+
+    model.add(Conv2D(64, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+
+    model.add(Flatten())
+    model.add(Dense(64))
+    model.add(Activation('relu'))
+    model.add(Dropout(0.75))
+    model.add(Dense(3))
+    model.add(Activation('softmax'))
+
+    model.compile(loss='categorical_crossentropy',
+                optimizer='adam',
+                metrics=['accuracy'])
+    
+`
 
 ## Using AWS Instance
 Maybe not quickly enough, it became apparent to me that my laptop is not capable of running tensorflow in any productive way. In order to overcome this obstacle, I decided to spin up an Amazon Web Services instance. The instance types can be found here: https://aws.amazon.com/ec2/instance-types/
@@ -97,6 +126,9 @@ I decided on the 'p2.xlarge' instance type under the Accelerated Computing secti
 I communicated to the AWS instance through SSH and GitHub. Image data and model data were transferred through SSH while code changes were transferred through GitHub. Because of the CLI aspect of SSH and my fear of code becoming out of sync, I always made changes to the code on my local computer then went through a push/pull cycle.
 
 ## Model Performance
+
+model training!
+confusion matrix!
 
 ## Using CNN in Realtime
 
