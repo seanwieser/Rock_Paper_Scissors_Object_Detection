@@ -103,6 +103,7 @@ if __name__ == "__main__":
         target_size=(img_width, img_height),
         batch_size=batch_size,
         subset='training',
+        color_mode='grayscale',
         class_mode='categorical')
 
     validation_generator = datagen.flow_from_directory(
@@ -110,13 +111,10 @@ if __name__ == "__main__":
         target_size=(img_width, img_height),
         batch_size=batch_size,
         subset='validation',
+        color_mode='grayscale'
         class_mode='categorical')
 
-    sean_generator = sean_test_datagen.flow_from_directory(
-        sean_data_dir,
-        target_size=(img_width, img_height),
-        batch_size=batch_size,
-        class_mode='categorical')
+
 
     if path.exists('../data/model_data/rps_weights_scratch.h5'):
         model.load_weights('../data/model_data/rps_weights_scratch.h5')
@@ -125,6 +123,13 @@ if __name__ == "__main__":
         history = model.fit(train_generator, steps_per_epoch=nb_train_samples // batch_size, epochs=epochs, validation_data=validation_generator)
         model.save_weights('../data/model_data/rps_weights_scratch.h5')
 
-    grade = model.evaluate(x=sean_generator)
+
+    # sean_generator = sean_test_datagen.flow_from_directory(
+    #     sean_data_dir,
+    #     target_size=(img_width, img_height),
+    #     batch_size=batch_size,
+    #     class_mode='categorical')
+
+    # grade = model.evaluate(x=sean_generator)
 
     print(grade)

@@ -5,6 +5,7 @@ from time import sleep
 from tensorflow.keras.models import load_model
 from skimage import filters, color, io
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import numpy as np
 
 
 
@@ -25,11 +26,12 @@ if __name__ == "__main__":
         target_size=(200, 300),
         batch_size=16,
         class_mode='categorical')
-    # predict_image = io.imread('../data/sean_test/paper/sean006.png')
+    predict_image = io.imread('../data/sean_test/paper/sean006.png').astype('float') / 255
+    predict_image = np.array([predict_image, predict_image, predict_image])
     model = load_model('../data/model_data/rps_model.h5')
-    print('Predicting')
+    print('Predicting', predict_image.shape)
     # print(model.summary())
-    print(model.predict(sean_generator, verbose=1))
+    print(model.predict(predict_image, verbose=1))
     
     
     
