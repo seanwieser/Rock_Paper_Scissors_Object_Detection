@@ -26,7 +26,7 @@ if __name__ == "__main__":
         target_size=(200, 300),
         batch_size=16,
         class_mode='categorical')
-    raw_images = io.imread_collection('../data/sean_test/rock/*.png')
+    raw_images = io.imread_collection('../data/sean_test/scissors/*.png')
     predict_images=[]
     for raw_image in raw_images:
         predict_images.append(np.expand_dims(np.reshape(raw_image.astype('float') / 255, (200, 300, 1)), axis=0))
