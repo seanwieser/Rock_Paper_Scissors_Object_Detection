@@ -70,7 +70,7 @@ if __name__ == "__main__":
     img_width, img_height = 200, 300
 
     train_data_dir = '../data/train'
-    # validation_data_dir = '../data/test'
+    validation_data_dir = '../data/test'
     sean_data_dir = '../data/sean_test'
     nb_train_samples = 2684
     nb_validation_samples = 390
@@ -83,15 +83,15 @@ if __name__ == "__main__":
         input_shape = (img_width, img_height, 1)
 
     model = Sequential()
-    model.add(Conv2D(32, (3, 3), input_shape=input_shape, padding='same'))
+    model.add(Conv2D(32, (3, 3), input_shape=input_shape))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
-    model.add(Conv2D(32, (3, 3), padding='same'))
+    model.add(Conv2D(32, (3, 3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
-    model.add(Conv2D(64, (3, 3), padding='same'))
+    model.add(Conv2D(64, (3, 3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
@@ -142,11 +142,7 @@ if __name__ == "__main__":
     if path.exists('../data/model_data/rps_weights_scratch.h5'):
         model.load_weights('../data/model_data/rps_weights_scratch.h5')
     else:
-        history = model.fit(
-            train_generator,
-            steps_per_epoch=nb_train_samples // batch_size,
-            epochs=epochs,
-            validation_data=validation_generator)
+        history = model.fit(train_generator, steps_per_epoch=nb_train_samples // batch_size, epochs=epochs, validation_data=validation_generator)
         model.save_weights('../data/model_data/rps_weights_scratch.h5')
         plot_acc_epoch(history)
 
