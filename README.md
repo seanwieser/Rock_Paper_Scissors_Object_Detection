@@ -11,7 +11,7 @@ Rock Paper Scissors is a game played by two people where each player simulataneo
 
 I found the dataset on Kaggle (https://www.kaggle.com/drgfreeman/rockpaperscissors/version/2?) containing pictures of different hands in each of the three configurations: rock, paper, and scissors. Each one of these configurations (or classes) had a little over 700 images each, which seemed to be enough for simple image classification. An example of images from this set are shown below:
 
-green unrotated dataset!
+| [![rock](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/kaggle_rock.png)]  | [![paper](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/kaggle_paper.png)] | [![scissors](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/kaggle_scissors.png)]
 
 Each image is 300x200 pixels. The images as a whole have consistent background and lighting but have many styles of hands and different ways they make up each of the three configurations. I was happy to see there was consistency in all the parts of the image that I wasn't predicting on.
 
