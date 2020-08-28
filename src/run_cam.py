@@ -31,7 +31,7 @@ if __name__ == "__main__":
     for raw_image in raw_images:
         predict_images.append(np.expand_dims(np.reshape(raw_image.astype('float') / 255, (200, 300, 1)), axis=0))
     model = load_model('../data/model_data/rps_model.h5')
-    print('Predicting', predict_images.shape)
+    print('Predicting')
     # print(model.summary())
     for image in predict_images:
         print(model.predict(predict_image, verbose=1))
