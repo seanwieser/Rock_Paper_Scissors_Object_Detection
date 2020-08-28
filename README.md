@@ -13,16 +13,18 @@ I found the dataset on Kaggle (https://www.kaggle.com/drgfreeman/rockpaperscisso
 
 green unrotated dataset
 
+Each image is 300x200 pixels. The images as a whole have consistent background and lighting but have many styles of hands and different ways they make up each of the three configurations. I was happy to see there was consistency in all the parts of the image that I wasn't predicting on.
+
 ### Adding My Own Images
 
 I trained an initial model that performed well with validation data that came from the kaggle dataset. That was encouraging but not that exciting to me because I have no idea whether or not it will be able to predict images of my own hand! I achieved this task by writing some utility scripts to produce images that mimic the images in the kaggle dataset. 
 
-- bulk_crop.py - Crops and resaves all images in a directory to 200x300 pixels in the top right of source image
-
 - lap_cam.py - Captures and saves images using my laptop camera. Captures are made everytime the user clicks 'Enter'
 
-- process_images.py - rotate: Rotates and resaves all images in directory 90 degrees clockwise
-                      save_sobels: Saves sobel filtered images of all images in a directory
+- bulk_crop.py - Crops and resaves all images in a directory to 200x300 pixels in the top right of source image
+
+- process_images.py - rotate: Rotates and resaves all images in directory 90 degrees clockwise. Used for Kaggle images.
+                      save_sobels: Saves sobel filtered images of all images in a directory. Used on all images.
 
 
 
