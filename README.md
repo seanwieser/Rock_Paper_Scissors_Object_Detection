@@ -25,7 +25,7 @@ I trained an initial model that performed well with validation data that came fr
 
 - bulk_crop.py - Crops and resaves all images in a directory to 200x300 pixels in the top left of source image
 
-- process_images.py - rotate: Rotates and resaves all images in directory 90 degrees clockwise. Used for Kaggle images.
+- process_images.py - rotate_images: Rotates and resaves all images in directory 90 degrees clockwise. Used for Kaggle images.<br />
                       save_sobels: Saves sobel filtered images of all images in a directory. Used on all images.
 
 | ![rock](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/sean_rock.png)  | ![paper](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/sean_paper.png) | ![scissors](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/sean_scissors.png)
