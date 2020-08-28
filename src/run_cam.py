@@ -27,7 +27,7 @@ if __name__ == "__main__":
         batch_size=16,
         class_mode='categorical')
     predict_image = io.imread('../data/sean_test/paper/sean006.png').astype('float') / 255
-    predict_image = np.array([predict_image, predict_image, predict_image])
+    image = np.expand_dims(predict_image, axis=0))
     model = load_model('../data/model_data/rps_model.h5')
     print('Predicting', predict_image.shape)
     # print(model.summary())
