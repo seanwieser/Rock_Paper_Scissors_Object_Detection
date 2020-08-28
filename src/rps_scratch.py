@@ -165,24 +165,24 @@ if __name__ == "__main__":
         model.save(('../data/model_data/rps_model.h5'))
     else:
         history = model.fit(train_generator, steps_per_epoch=nb_train_samples // batch_size, epochs=epochs, validation_data=validation_generator)
-        plot_history(history)
         model.save_weights('../data/model_data/rps_weights_scratch.h5')
 
 
-    sean_generator = sean_test_datagen.flow_from_directory(
-        sean_data_dir,
-        target_size=(img_width, img_height),
-        batch_size=batch_size,
-        color_mode='grayscale',
-        class_mode='categorical')
+    # sean_generator = sean_test_datagen.flow_from_directory(
+    #     sean_data_dir,
+    #     target_size=(img_width, img_height),
+    #     batch_size=batch_size,
+    #     color_mode='grayscale',
+    #     class_mode='categorical')
 
-    grade = model.evaluate(x=sean_generator)
+    # grade = model.evaluate(x=sean_generator)
 
-    print(grade)
+    # print(grade)
 
+    plot_history(history)
 
     # compute predictions
-    predictions = model.predict(generator=validation_generator)
+    predictions = model.predict(validation_generator)
     y_pred = [np.argmax(probas) for probas in predictions]
     y_test = validation_generator.classes
     class_names = validation_generator.class_indices.keys()
