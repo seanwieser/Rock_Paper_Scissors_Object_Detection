@@ -124,18 +124,17 @@ def build_model():
 
 if __name__ == "__main__":
     img_width, img_height = 200, 300
-    train_data_dir = '../data/train'
-    validation_data_dir = '../data/test'
+    train_data_dir = '../data/train_split/train'
+    validation_data_dir = '../data/train_split/val'
     nb_train_samples = 2684
     nb_validation_samples = 390
-    epochs = 50
+    epochs = 5
     batch_size = 16
     # this is the augmentation configuration we will use for training
     datagen = ImageDataGenerator(
         rescale=1. / 255,
         shear_range=0.2,
         zoom_range=0.2,
-        validation_split=0.2,
         horizontal_flip=True)
 
     # this is the augmentation configuration we will use for testing:
@@ -146,16 +145,14 @@ if __name__ == "__main__":
         train_data_dir,
         target_size=(img_width, img_height),
         batch_size=batch_size,
-        subset='training',
         color_mode='grayscale',
         class_mode='categorical',
         shuffle=True)
 
-    validation_generator = datagen.flow_from_directory(
-        train_data_dir,
+    validation_generator = sean_test_datagen.flow_from_directory(
+        validation_data_dir,
         target_size=(img_width, img_height),
         batch_size=batch_size,
-        subset='validation',
         color_mode='grayscale',
         class_mode='categorical',
         shuffle=False)
