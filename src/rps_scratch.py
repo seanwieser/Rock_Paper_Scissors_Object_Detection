@@ -159,7 +159,7 @@ if __name__ == "__main__":
         color_mode='grayscale',
         class_mode='categorical',
         shuffle=False)
-
+    history = 0
     if path.exists('../data/model_data/rps_weights_scratch.h5'):
         model.load_weights('../data/model_data/rps_weights_scratch.h5')
         model.save(('../data/model_data/rps_model.h5'))
