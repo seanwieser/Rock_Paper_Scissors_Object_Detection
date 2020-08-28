@@ -45,6 +45,7 @@ import matplotlib.pyplot as plt
 from os import path  
 from sklearn.metrics import confusion_matrix
 import itertools
+import numpy as np
 
 def plot_confusion_matrix(cm, classes, title='Confusion matrix', cmap=plt.cm.Blues):
     cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
