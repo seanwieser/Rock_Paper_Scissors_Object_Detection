@@ -54,10 +54,11 @@ In order to use the incredible functionality of the ImageDataGenerator class (de
 ### Preprocessing
 
 Even though I have my image dataset polished off, I don't want to directly feed them into a model to train. In order to get more variety of images to train on, I decided to use the ImageDataGenerator class in keras. This produces many augmentations of all the images for the model to train on. Hopefully this will help the model be more robust in terms of inputs it can predict well on.
+It might help to look at a snippet of code to see how I implemented this class:
 
 
+`
 
-`It might help to look at a snippet of code to see how I implemented this class:
     datagen = ImageDataGenerator(
         rescale=1. / 255,
         shear_range=0.2,
