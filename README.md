@@ -30,7 +30,9 @@ I trained an initial model that performed well with validation data that came fr
 
 ### Final Dataset
 
-final images!
+| ![rock](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/kaggle_rock_sobel.png)  | ![paper](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/kaggle_paper_sobel.png) | ![scissors](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/kaggle_scissors_sobel.png)
+
+| ![rock](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/sean_rock_sobel.png)  | ![paper](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/sean_paper_sobel.png) | ![scissors](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/sean_scissors_sobel.png)
 
 In order to use the incredible functionality of the ImageDataGenerator class (described below), the final structure of the directory tree is as follows:
 
