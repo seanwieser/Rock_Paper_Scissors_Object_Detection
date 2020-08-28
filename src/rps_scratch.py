@@ -42,28 +42,7 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras.layers import Activation, Dropout, Flatten, Dense
 from tensorflow.keras import backend as K
 import matplotlib.pyplot as plt
-from os import path
-
-def plot_acc_epoch(history):
-    # summarize history for accuracy
-    fig, ax = plt.subplots()
-    ax.plot(history.history['accuracy'], label='train')
-    ax.plot(history.history['val_accuracy'], label='test')
-    ax.set_title('model accuracy')
-    ax.set_ylabel('accuracy')
-    ax.set_xlabel('epoch')
-    ax.legend(loc='upper left')
-    plt.savefig('accuracy.png')
-
-    # summarize history for loss
-    fig2, ax2 = plt.subplots()
-    ax.plot(history.history['loss'], label='train')
-    ax.plot(history.history['val_loss'], label='test')
-    ax.set_title('model loss')
-    ax.set_ylabel('loss')
-    ax.set_xlabel('epoch')
-    ax.legend(loc='upper left')
-    plt.savefig('loss.png')    
+from os import path  
 
 if __name__ == "__main__":
         # dimensions of our images.
@@ -141,11 +120,10 @@ if __name__ == "__main__":
 
     if path.exists('../data/model_data/rps_weights_scratch.h5'):
         model.load_weights('../data/model_data/rps_weights_scratch.h5')
+        model.save(('../data/model_data/rps_model.h5'))
     else:
         history = model.fit(train_generator, steps_per_epoch=nb_train_samples // batch_size, epochs=epochs, validation_data=validation_generator)
         model.save_weights('../data/model_data/rps_weights_scratch.h5')
-        plot_acc_epoch(history)
-
 
     grade = model.evaluate(x=sean_generator)
 
