@@ -4,6 +4,8 @@
 
 Rock Paper Scissors is a game played by two people where each player simulataneously configures their hand into the shape of a rock, paper, or scissors. Depending on what each player chose to do, a winner is determined by the following: rock beats scissors, scissors beats paper, and paper beats rock. An example of a hand in each of these configurations is shown below.
 
+hands in configurations
+
 ## Dataset Journey
 ### Inital Training Set
 
@@ -15,7 +17,7 @@ green unrotated dataset
 
 I trained an initial model that performed well with validation data that came from the kaggle dataset. That was encouraging but not that exciting to me because I have no idea whether or not it will be able to predict images of my own hand! I achieved this task by writing some utility scripts to produce images that mimic the images in the kaggle dataset. 
 
-- bulk_crop.py - Crops and resaves all images in a directory to 200x300 pixels
+- bulk_crop.py - Crops and resaves all images in a directory to 200x300 pixels in the top right of source image
 
 - lap_cam.py - Captures and saves images using my laptop camera. Captures are made everytime the user clicks 'Enter'
 
@@ -24,19 +26,20 @@ I trained an initial model that performed well with validation data that came fr
 
 
 
+
 After some restructering and renaming of files, the directory tree is shown below:
 
 .<br />
 +-- data <br />
-|&nbsp;&nbsp;&nbsp;&nbsp;+-- train<br /> (654 files each)
+|&nbsp;&nbsp;&nbsp;&nbsp;+-- train (654 files each)<br /> 
 |&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;+-- paper<br />
 |&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;+-- rock<br />
 |&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;+-- scissors<br />
-|&nbsp;&nbsp;&nbsp;&nbsp;+-- val<br /> (122 files each)
+|&nbsp;&nbsp;&nbsp;&nbsp;+-- val (122 files each)<br /> 
 |&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;+-- paper<br />
 |&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;+-- rock<br />
 |&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;+-- scissors<br />
-|&nbsp;&nbsp;&nbsp;&nbsp;+-- test<br /> (42 files each)
+|&nbsp;&nbsp;&nbsp;&nbsp;+-- test (42 files each)<br /> 
 |&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;+-- paper<br />
 |&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;+-- rock<br />
 |&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;+-- scissors<br />
@@ -51,8 +54,11 @@ After some restructering and renaming of files, the directory tree is shown belo
 The architecture for my CNN was inspired by the blog post https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
 
 ## Using AWS Instance
+Maybe not quickly enough, it became apparent to me that my laptop is not capable of running tensorflow in any productive way. In order to overcome this obstacle, I decided to spin up an Amazon Web Services instance. The instance types can be found here: https://aws.amazon.com/ec2/instance-types/
 
+I decided on the 'p2.xlarge' instance type under the Accelerated Computing section because it has a dedicated NVIDIA GPU. Using this instance to train a model with tensorflow made this project viable but it did take substantial time to set up in the correct way. Some of the set up included installing tensorflow-gpu, setting up NVIDIA drivers, ensuring version compatibility, and copying over image data. Each of these had to be done several times throughout the week as my project developed.
 
+I communicated to the AWS instance through SSH and GitHub. Image data and model data were transferred through SSH while code changes were transferred through GitHub. Because of the CLI aspect of SSH and my fear of code becoming out of sync, I always made changes to the code on my local computer then went through a push/pull cycle.
 
 ## Model Performance
 
