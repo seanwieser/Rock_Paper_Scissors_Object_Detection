@@ -47,7 +47,7 @@ from sklearn.metrics import confusion_matrix
 import itertools
 import numpy as np
 
-def plot_confusion_matrix(cm, classes, title='Confusion matrix', cmap=plt.cm.Blues, filename):
+def plot_confusion_matrix(cm, classes, title='Confusion matrix', cmap=plt.cm.Blues, fname=filename):
     cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
     plt.figure(figsize=(10,10))
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
@@ -80,7 +80,7 @@ def make_cm(gen, filename):
     np.set_printoptions(precision=2)
 
     # plot normalized confusion matrix
-    plot_confusion_matrix(cnf_matrix, classes=class_names, title='Normalized confusion matrix', filename)
+    plot_confusion_matrix(cnf_matrix, classes=class_names, title='Normalized confusion matrix', fname=filename)
 
 
 def plot_history(history):
