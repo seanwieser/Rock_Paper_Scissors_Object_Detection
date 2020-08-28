@@ -29,7 +29,7 @@ if __name__ == "__main__":
     raw_images = io.imread_collection('../data/sean_test/paper/*.png')
     predict_images=[]
     for raw_image in raw_images:
-        predict_images.append(np.expand_dims(np.reshape(raw_image.astype('float') / 255, (200, 300, 1))), axis=0)
+        predict_images.append(np.expand_dims(np.reshape(raw_image.astype('float') / 255, (200, 300, 1)), axis=0))
     model = load_model('../data/model_data/rps_model.h5')
     print('Predicting', predict_images.shape)
     # print(model.summary())
