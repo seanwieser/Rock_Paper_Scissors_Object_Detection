@@ -1,6 +1,6 @@
-import pygame
-import pygame.camera
-from pygame.locals import *
+# import pygame
+# import pygame.camera
+# from pygame.locals import *
 from time import sleep
 from keras.models import load_model
 from skimage import filters, color, io
@@ -12,10 +12,10 @@ if __name__ == "__main__":
     display_width = 200
     display_height = 300
     # pygame.init()
-    pygame.camera.init()
-    camlist = pygame.camera.list_cameras()
-    if camlist:
-        cam = pygame.camera.Camera(camlist[0],(640,480))  
+    # pygame.camera.init()
+    # camlist = pygame.camera.list_cameras()
+    # if camlist:
+    #     cam = pygame.camera.Camera(camlist[0],(640,480))  
     # cam.start()
     # gameDisplay = pygame.display.set_mode((display_width,display_height))
     sean_data_dir = '../data/temp'
@@ -33,9 +33,9 @@ if __name__ == "__main__":
     
     
     
-    black = (0,0,0)
-    white = (255,255,255)
-    clock = pygame.time.Clock()
+    # black = (0,0,0)
+    # white = (255,255,255)
+    # clock = pygame.time.Clock()
     # while True:
     #     image = cam.get_image()
     #     image_arr = pygame.surfarray.array3d(image)[:display_width,:display_height]
