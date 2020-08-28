@@ -145,10 +145,10 @@ Rock Paper Scissors is an interactive game that takes place in real time. Loadin
 (Add video link to example of real time prediction)
 
 ## Next Steps
-1. Code a Rock Paper Scissors game 
-&nbsp;&nbsp;&nbsp;&nbsp;- counts down and reads your input
-&nbsp;&nbsp;&nbsp;&nbsp;- outputs its own decision based on some algorithm (which could incorporate opponent's recent moves)
-&nbsp;&nbsp;&nbsp;&nbsp;- keeps score over multiple rounds and display nice scoreboard
-&nbsp;&nbsp;&nbsp;&nbsp;- make a web app that anyone can use to play against my AI
+1. Code a Rock Paper Scissors game <br />
+&nbsp;&nbsp;&nbsp;&nbsp;- counts down and reads your input<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- outputs its own decision based on some algorithm (which could incorporate opponent's recent moves)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;- keeps score over multiple rounds and display nice scoreboard <br />
+&nbsp;&nbsp;&nbsp;&nbsp;- make a web app that anyone can use to play against my AI <br />
 2.Upgrade image classifier to object detector and train model on yahtzee roll image dataset to play yahtzee against my computer
 
