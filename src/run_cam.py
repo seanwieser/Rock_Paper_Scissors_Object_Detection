@@ -26,12 +26,13 @@ if __name__ == "__main__":
         target_size=(200, 300),
         batch_size=16,
         class_mode='categorical')
-    predict_image = np.reshape(io.imread('../data/sean_test/paper/sean006.png').astype('float') / 255, (1, 200, 300))
-    predict_image = np.expand_dims(predict_image, axis=0)
+    predict_images = np.reshape(io.imread_collection('../data/sean_test/paper/*.png').astype('float') / 255, (200, 300, 1))
+    predict_images = np.expand_dims(predict_image, axis=0)
     model = load_model('../data/model_data/rps_model.h5')
-    print('Predicting', predict_image.shape)
+    print('Predicting', predict_images.shape)
     # print(model.summary())
-    print(model.predict(predict_image, verbose=1))
+    for image in predict_images:
+        print(model.predict(predict_image, verbose=1))
     
     
     
