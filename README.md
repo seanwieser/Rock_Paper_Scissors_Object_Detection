@@ -1,17 +1,19 @@
 # Rock_Paper_Scissors
 
+title image!
+
 ## Introduction
 
 Rock Paper Scissors is a game played by two people where each player simulataneously configures their hand into the shape of a rock, paper, or scissors. Depending on what each player chose to do, a winner is determined by the following: rock beats scissors, scissors beats paper, and paper beats rock. An example of a hand in each of these configurations is shown below.
 
-hands in configurations
+hands in configurations!
 
 ## Dataset Journey
 ### Inital Training Set
 
-I found the dataset on Kaggle (https://www.kaggle.com/drgfreeman/rockpaperscissors/version/2?) containing pictures of different hands in each of the three configurations: rock, paper, and scissors. Each one of these configurations (or classes) had a little over 700 images each, which seemed like enough for simple image classification. An example of images from this set are shown below:
+I found the dataset on Kaggle (https://www.kaggle.com/drgfreeman/rockpaperscissors/version/2?) containing pictures of different hands in each of the three configurations: rock, paper, and scissors. Each one of these configurations (or classes) had a little over 700 images each, which seemed to be enough for simple image classification. An example of images from this set are shown below:
 
-green unrotated dataset
+green unrotated dataset!
 
 Each image is 300x200 pixels. The images as a whole have consistent background and lighting but have many styles of hands and different ways they make up each of the three configurations. I was happy to see there was consistency in all the parts of the image that I wasn't predicting on.
 
@@ -26,10 +28,13 @@ I trained an initial model that performed well with validation data that came fr
 - process_images.py - rotate: Rotates and resaves all images in directory 90 degrees clockwise. Used for Kaggle images.
                       save_sobels: Saves sobel filtered images of all images in a directory. Used on all images.
 
+my images!
 
+### Final Dataset
 
+final images!
 
-After some restructering and renaming of files, the directory tree is shown below:
+In order to use the incredible functionality of the ImageDataGenerator class (described below), the final structure of the directory tree is as follows:
 
 .<br />
 +-- data <br />
@@ -46,11 +51,9 @@ After some restructering and renaming of files, the directory tree is shown belo
 |&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;+-- rock<br />
 |&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;+-- scissors<br />
 
-
-
-
 ### Preprocessing
 
+Even though I have my image dataset polished off, I don't want to directly feed them into a model to train. In order to get more variety of images to train on, I decided to use the ImageDataGenerator class
 
 ## CNN Architecture
 The architecture for my CNN was inspired by the blog post https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
