@@ -53,7 +53,33 @@ In order to use the incredible functionality of the ImageDataGenerator class (de
 
 ### Preprocessing
 
-Even though I have my image dataset polished off, I don't want to directly feed them into a model to train. In order to get more variety of images to train on, I decided to use the ImageDataGenerator class
+Even though I have my image dataset polished off, I don't want to directly feed them into a model to train. In order to get more variety of images to train on, I decided to use the ImageDataGenerator class in keras. 
+
+`    datagen = ImageDataGenerator(
+        rescale=1. / 255,
+        shear_range=0.2,
+        zoom_range=0.2,
+        horizontal_flip=True)
+
+    # this is the augmentation configuration we will use for testing:
+    # only rescaling
+    sean_test_datagen = ImageDataGenerator(rescale=1. / 255)
+
+    train_generator = datagen.flow_from_directory(
+        train_data_dir,
+        target_size=(img_width, img_height),
+        batch_size=batch_size,
+        color_mode='grayscale',
+        class_mode='categorical',
+        shuffle=True)
+
+    validation_generator = sean_test_datagen.flow_from_directory(
+        validation_data_dir,
+        target_size=(img_width, img_height),
+        batch_size=batch_size,
+        color_mode='grayscale',
+        class_mode='categorical',
+        shuffle=False)`
 
 ## CNN Architecture
 The architecture for my CNN was inspired by the blog post https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
