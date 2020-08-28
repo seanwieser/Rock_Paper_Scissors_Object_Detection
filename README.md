@@ -4,7 +4,9 @@
 
 ## Introduction
 
-Rock Paper Scissors is a game played by two people where each player simulataneously configures their hand into the shape of a rock, paper, or scissors. Depending on what each player chose to do, a winner is determined by the following: rock beats scissors, scissors beats paper, and paper beats rock. As lonely as it sounds, I love the idea of creating a way to play the game in a natural way against an unnatural opponent, my computer! The only thing stopping us from doing this already is that the computer can't 'see' what you chose to play on a given round. In order to solve this problem, I decided to build an image classifier by training a convolutional neural network on images of hands.
+Rock Paper Scissors is a game played by two people where each player simulataneously configures their hand into the shape of a rock, paper, or scissors. Depending on what each player chose to do, a winner is determined by the following: rock beats scissors, scissors beats paper, and paper beats rock.
+
+As lonely as it sounds, I love the idea of creating a way to play the game in a natural way against an unnatural opponent, my computer! The only thing stopping us from doing this already is that the computer can't 'see' what you chose to play on a given round. In order to solve this problem, I decided to build an image classifier by training a convolutional neural network on images of hands.
 
 ## Dataset Journey
 ### Inital Training Set
