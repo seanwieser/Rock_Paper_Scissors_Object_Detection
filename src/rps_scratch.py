@@ -44,6 +44,23 @@ from tensorflow.keras import backend as K
 import matplotlib.pyplot as plt
 from os import path  
 
+def plot_history(history):
+    plt.figure(figsize=(20,10))
+    plt.subplot(1, 2, 1)
+    plt.suptitle('Optimizer : Adam', fontsize=10)
+    plt.ylabel('Loss', fontsize=16)
+    plt.plot(history.history['loss'], label='Training Loss')
+    plt.plot(history.history['val_loss'], label='Validation Loss')
+    plt.legend(loc='upper right')
+    plt.savefig('loss.png')
+
+    plt.subplot(1, 2, 2)
+    plt.ylabel('Accuracy', fontsize=16)
+    plt.plot(history.history['acc'], label='Training Accuracy')
+    plt.plot(history.history['val_acc'], label='Validation Accuracy')
+    plt.legend(loc='lower right')
+    plt.savefig('accuracy.png')
+
 if __name__ == "__main__":
         # dimensions of our images.
     img_width, img_height = 200, 300
@@ -53,7 +70,7 @@ if __name__ == "__main__":
     sean_data_dir = '../data/sean_test'
     nb_train_samples = 2684
     nb_validation_samples = 390
-    epochs = 10
+    epochs = 3
     batch_size = 16
 
     if K.image_data_format() == 'channels_first':
@@ -114,13 +131,12 @@ if __name__ == "__main__":
         color_mode='grayscale',
         class_mode='categorical')
 
-
-
     if path.exists('../data/model_data/rps_weights_scratch.h5'):
         model.load_weights('../data/model_data/rps_weights_scratch.h5')
         model.save(('../data/model_data/rps_model.h5'))
     else:
         history = model.fit(train_generator, steps_per_epoch=nb_train_samples // batch_size, epochs=epochs, validation_data=validation_generator)
+        plot_history(history)
         model.save_weights('../data/model_data/rps_weights_scratch.h5')
 
 
