@@ -111,7 +111,7 @@ if __name__ == "__main__":
         target_size=(img_width, img_height),
         batch_size=batch_size,
         subset='validation',
-        color_mode='grayscale'
+        color_mode='grayscale',
         class_mode='categorical')
 
 
