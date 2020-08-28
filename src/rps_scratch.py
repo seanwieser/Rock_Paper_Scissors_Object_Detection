@@ -142,7 +142,7 @@ if __name__ == "__main__":
     test_data_dir = '../data/train_split/test'
     nb_train_samples = 2684
     nb_validation_samples = 390
-    epochs = 2
+    epochs = 100
     batch_size = 16
     # this is the augmentation configuration we will use for training
     datagen = ImageDataGenerator(
