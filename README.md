@@ -4,9 +4,7 @@ title image!
 
 ## Introduction
 
-Rock Paper Scissors is a game played by two people where each player simulataneously configures their hand into the shape of a rock, paper, or scissors. Depending on what each player chose to do, a winner is determined by the following: rock beats scissors, scissors beats paper, and paper beats rock. An example of a hand in each of these configurations is shown below.
-
-hands in configurations!
+Rock Paper Scissors is a game played by two people where each player simulataneously configures their hand into the shape of a rock, paper, or scissors. Depending on what each player chose to do, a winner is determined by the following: rock beats scissors, scissors beats paper, and paper beats rock. As lonely as it sounds, I love the idea of creating a way to play the game in a natural way against an unnatural opponent, my computer! The only thing stopping us from doing this already is that the computer can't 'see' what you chose to play on a given round. In order to solve this problem, I decided to build an image classifier by training a convolutional neural network on images of hands.
 
 ## Dataset Journey
 ### Inital Training Set
@@ -58,8 +56,7 @@ Even though I have my image dataset polished off, I don't want to directly feed 
 It might help to look at a snippet of code to see how I implemented this class:
 
 
-`
-
+```
     datagen = ImageDataGenerator(
         rescale=1. / 255,
         shear_range=0.2,
@@ -83,7 +80,7 @@ It might help to look at a snippet of code to see how I implemented this class:
         color_mode='grayscale',
         class_mode='categorical',
         shuffle=False)
-`
+```
 
 It is important to think about the images that are being used. First, the hand in each image is oriented and sized in a fairly consistent way. This means that I don't need to augment the images in any extreme way to be able to predict on inputs that are similar to the images that the model is training on. If I expected to have inputs that are varying to a higher degree, I might have been more aggressive with the data augmentation and preproccessing.   
 
