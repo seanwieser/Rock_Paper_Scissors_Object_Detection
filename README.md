@@ -23,7 +23,7 @@ I trained an initial model that performed well with validation data that came fr
 
 - lap_cam.py - Captures and saves images using my laptop camera. Captures are made everytime the user clicks 'Enter'
 
-- bulk_crop.py - Crops and resaves all images in a directory to 200x300 pixels in the top right of source image
+- bulk_crop.py - Crops and resaves all images in a directory to 200x300 pixels in the top left of source image
 
 - process_images.py - rotate: Rotates and resaves all images in directory 90 degrees clockwise. Used for Kaggle images.
                       save_sobels: Saves sobel filtered images of all images in a directory. Used on all images.
