@@ -147,8 +147,6 @@ if __name__ == "__main__":
         plot_acc_epoch(history)
 
 
-    grade = model.evaluate(
-        x=sean_generator, batch_size=batch_size, verbose=1, sample_weight=None, steps=None,
-        callbacks=None, max_queue_size=10, workers=1, use_multiprocessing=False)
+    grade = model.evaluate(x=sean_generator)
 
     print(grade)
