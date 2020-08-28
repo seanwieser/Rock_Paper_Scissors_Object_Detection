@@ -1,9 +1,11 @@
 import pygame
 import pygame.camera
+from pygame.font import Font
 from pygame.locals import *
 from time import sleep
 from tensorflow.keras.models import load_model
 from skimage import filters, color, io
+from skimage.transform import rotate
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 import threading
@@ -11,10 +13,12 @@ from queue import LifoQueue
 
 def transform_image(image):
     cropped = pygame.surfarray.array3d(image)[:200,:300]
-    sobel = filters.sobel(color.rgb2gray(cropped))
-    return np.expand_dims(np.reshape(sobel.astype('float') / 255, (200, 300, 1)), axis=0)
+    sobel = rotate(filters.sobel(color.rgb2gray(cropped)), -90, resize=True)
+    return sobel, np.expand_dims(np.reshape(sobel, (200, 300, 1)), axis=0)
 
-def background():
+if __name__ == "__main__":
+    class_labels = ['Paper', 'Rock', 'Scissors']
+    model = load_model('../data/model_data/rps_model.h5')
     display_width = 200
     display_height = 300
     pygame.init()
@@ -26,38 +30,24 @@ def background():
     gameDisplay = pygame.display.set_mode((display_width,display_height))
     black = (0,0,0)
     white = (255,255,255)
+    font = Font('freesansbold.ttf', 18)
+
     clock = pygame.time.Clock()
     while True:
-        image = cam.get_image()
-        q.put(image)
-        if q.qsize() > 1000:
-            q.queue.clear()
+        image_sur = cam.get_image()
+        image_arr = transform_image(image_sur)
+        probs = model.predict(image_arr[1])
+        text = class_labels[np.argmax(probs)]
+        textsurf = font.render(text, True, black)
+        textrect = textsurf.get_rect()
+        textrect.center = 40, 20
         gameDisplay.fill(white)
-        gameDisplay.blit(image, (0,0))
+        gameDisplay.blit(image_sur, (0,0))
+        gameDisplay.blit(textsurf, textrect)
         pygame.display.update()
         clock.tick(60)
-
-# def foreground():
-
-
-
-if __name__ == "__main__":
-    flag = False
-    q = LifoQueue()
-    model = load_model('../data/model_data/rps_model.h5')
-
-    b = threading.Thread(name='background', target=background)
-    # f = threading.Thread(name='foreground', target=foreground)
-
-    b.start()
-    while True:
-        input('Press Enter to predict capture...')
-        image_sur = q.get()
-        image_arr = transform_image(image_sur)
-        probs = model.predict(image_arr)
         model.reset_states()
-        print(probs)
-    # f.start()
+
     
 
 
