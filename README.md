@@ -53,16 +53,17 @@ In order to use the incredible functionality of the ImageDataGenerator class (de
 
 ### Preprocessing
 
-Even though I have my image dataset polished off, I don't want to directly feed them into a model to train. In order to get more variety of images to train on, I decided to use the ImageDataGenerator class in keras. 
+Even though I have my image dataset polished off, I don't want to directly feed them into a model to train. In order to get more variety of images to train on, I decided to use the ImageDataGenerator class in keras. This produces many augmentations of all the images for the model to train on. Hopefully this will help the model be more robust in terms of inputs it can predict well on.
 
-`    datagen = ImageDataGenerator(
+It might help to look at a snippet of code to see how I implemented this class:
+
+`
+    datagen = ImageDataGenerator(
         rescale=1. / 255,
         shear_range=0.2,
         zoom_range=0.2,
         horizontal_flip=True)
-
-    # this is the augmentation configuration we will use for testing:
-    # only rescaling
+        
     sean_test_datagen = ImageDataGenerator(rescale=1. / 255)
 
     train_generator = datagen.flow_from_directory(
@@ -79,7 +80,10 @@ Even though I have my image dataset polished off, I don't want to directly feed 
         batch_size=batch_size,
         color_mode='grayscale',
         class_mode='categorical',
-        shuffle=False)`
+        shuffle=False)
+`
+
+It is important to think about the images that are being used. First, the hand in each image is oriented and sized in a fairly consistent way. This means that I don't need to augment the images in any extreme way to be able to predict on inputs that are similar to the images that the model is training on. If I expected to have inputs that are varying to a higher degree, I might have been more aggressive with the data augmentation and preproccessing.   
 
 ## CNN Architecture
 The architecture for my CNN was inspired by the blog post https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
