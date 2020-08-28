@@ -26,7 +26,7 @@ I trained an initial model that performed well with validation data that came fr
 - process_images.py - rotate: Rotates and resaves all images in directory 90 degrees clockwise. Used for Kaggle images.
                       save_sobels: Saves sobel filtered images of all images in a directory. Used on all images.
 
-my images!
+| ![rock](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/sean_rock.png)  | ![paper](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/sean_paper.png) | ![scissors](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/sean_scissors.png)
 
 ### Final Dataset
 
