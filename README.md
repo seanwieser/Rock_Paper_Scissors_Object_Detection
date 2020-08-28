@@ -123,13 +123,16 @@ I decided on the 'p2.xlarge' instance type under the Accelerated Computing secti
 I communicated to the AWS instance through SSH and GitHub. Image data and model data were transferred through SSH while code changes were transferred through GitHub. Because of the CLI aspect of SSH and my fear of code becoming out of sync, I always made changes to the code on my local computer then went through a push/pull cycle.
 
 ## Model Performance
-
+Training over 100 Epochs
 ![training](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/accuracy_100_epochs.png "Training over 100 Epochs")
 
+Training over 30 Epochs
 ![training](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/accuracy.png "Training over 30 epochs")
 
+Validation Confusion Matrix
 ![cm](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/val_cm.png "Validation Confusion Matrix")
 
+Test Confusion Matrix
 ![cm](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/test_cm.png "Test Confusion Matrix")
 
 
