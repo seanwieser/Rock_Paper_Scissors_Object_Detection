@@ -142,7 +142,7 @@ Test Confusion Matrix
 
 Rock Paper Scissors is an interactive game that takes place in real time. Loading in images from a directory to predict on is cool but it doesn't help me play the game against the computer in a natural way. In order to solve this problem, I need to pipe video frames into my model for a real time prediction, which is done in run_cam.py
 
-(Add video link to example of real time prediction)
+[![Link to Video](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/accuracy.png)](https://www.youtube.com/watch?v=aAc_qmDHjIM "Rock Paper Scissors Image Classification")
 
 ## Next Steps
 1. Code a Rock Paper Scissors game <br />
