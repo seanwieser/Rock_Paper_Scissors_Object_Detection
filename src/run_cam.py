@@ -18,7 +18,7 @@ def transform_image(image):
 
 if __name__ == "__main__":
     class_labels = ['Paper', 'Rock', 'Scissors']
-    model = load_model('../data/model_data/rps_model.h5')
+    model = load_model('/home/seanwieser/galvanize/capstones/Rock_Paper_Scissors/data/model_data/rps_model.h5')
     display_width = 200
     display_height = 300
     pygame.init()
