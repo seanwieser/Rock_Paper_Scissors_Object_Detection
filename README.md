@@ -1,4 +1,4 @@
-# Rock_Paper_Scissors
+# Rock Paper Scissors Object Detection
 
 ![alt text](https://github.com/seanwieser/Rock_Paper_Scissors/blob/master/images/title.jpg "")
 
